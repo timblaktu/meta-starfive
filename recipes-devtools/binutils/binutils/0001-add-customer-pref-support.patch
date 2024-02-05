@@ -1,21 +1,21 @@
-From 3514789d54fb3515547a29405596d4f2cddd4585 Mon Sep 17 00:00:00 2001
+From ed52ba73f555c0a103e10f18127864e390c98443 Mon Sep 17 00:00:00 2001
 From: "max.ma" <max.ma@starfivetech.com>
 Date: Mon, 5 Sep 2022 01:17:31 -0700
-Subject: [PATCH 18/20] add customer pref support
+Subject: [PATCH 1/2] add customer pref support
 
 ---
  gas/config/tc-riscv.c      | 44 +++++++++++++++++++++++++++++++++++++-
- include/opcode/riscv-opc.h |  3 +++
+ include/opcode/riscv-opc.h |  1 +
  include/opcode/riscv.h     |  9 ++++++++
  opcodes/riscv-dis.c        | 10 +++++++++
  opcodes/riscv-opc.c        |  1 +
- 5 files changed, 66 insertions(+), 1 deletion(-)
+ 5 files changed, 64 insertions(+), 1 deletion(-)
 
 diff --git a/gas/config/tc-riscv.c b/gas/config/tc-riscv.c
-index a0e8456a0d..934eddc811 100644
+index 297bb9b2a81..e995cbf6417 100644
 --- a/gas/config/tc-riscv.c
 +++ b/gas/config/tc-riscv.c
-@@ -1201,7 +1201,9 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
+@@ -1354,7 +1354,9 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
  	case ')': break;
  	case '<': USE_BITS (OP_MASK_SHAMTW, OP_SH_SHAMTW); break;
  	case '>': USE_BITS (OP_MASK_SHAMT, OP_SH_SHAMT); break;
@@ -24,9 +24,9 @@ index a0e8456a0d..934eddc811 100644
 +  case '+': used_bits |= ENCODE_PREF_SIMM (-1U); break;
 +  case 'A': break; /* Macro operand, must be symbol.  */
  	case 'B': break; /* Macro operand, must be symbol or constant.  */
+ 	case 'c': break; /* Macro operand, must be symbol or constant.  */
  	case 'I': break; /* Macro operand, must be constant.  */
- 	case 'D': /* RD, floating point.  */
-@@ -1600,6 +1602,27 @@ check_absolute_expr (struct riscv_cl_insn *ip, expressionS *ex,
+@@ -1803,6 +1805,27 @@ check_absolute_expr (struct riscv_cl_insn *ip, expressionS *ex,
    normalize_constant_expr (ex);
  }
  
@@ -54,8 +54,8 @@ index a0e8456a0d..934eddc811 100644
  static symbolS *
  make_internal_label (void)
  {
-@@ -2906,6 +2929,25 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
- 	      asarg = expr_end;
+@@ -3165,6 +3188,25 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
+ 	      asarg = expr_parse_end;
  	      continue;
  
 +      case '#':
@@ -81,7 +81,7 @@ index a0e8456a0d..934eddc811 100644
  	      insn_with_csr = true;
  	      explicit_priv_attr = true;
 diff --git a/include/opcode/riscv-opc.h b/include/opcode/riscv-opc.h
-index 88b8d7ff59..6f08c72c88 100644
+index 90f44153750..07d5a11f733 100644
 --- a/include/opcode/riscv-opc.h
 +++ b/include/opcode/riscv-opc.h
 @@ -255,6 +255,7 @@
@@ -92,20 +92,11 @@ index 88b8d7ff59..6f08c72c88 100644
  #define MATCH_CSRRW 0x1073
  #define MASK_CSRRW  0x707f
  #define MATCH_CSRRS 0x2073
-@@ -2852,6 +2853,8 @@ DECLARE_INSN(cbo_clean, MATCH_CBO_CLEAN, MASK_CBO_CLEAN);
- DECLARE_INSN(cbo_flush, MATCH_CBO_FLUSH, MASK_CBO_FLUSH);
- DECLARE_INSN(cbo_inval, MATCH_CBO_INVAL, MASK_CBO_INVAL);
- DECLARE_INSN(cbo_zero, MATCH_CBO_ZERO, MASK_CBO_ZERO);
-+DECLARE_INSN(cbo_zero, MATCH_CBO_ZERO, MASK_CBO_ZERO);
-+
- #endif /* DECLARE_INSN */
- #ifdef DECLARE_CSR
- /* Unprivileged Counter/Timers CSRs.  */
 diff --git a/include/opcode/riscv.h b/include/opcode/riscv.h
-index b115e338a0..4afb16c092 100644
+index d859f44fc92..40ae251ae3c 100644
 --- a/include/opcode/riscv.h
 +++ b/include/opcode/riscv.h
-@@ -156,6 +156,10 @@ static const char * const riscv_pred_succ[16] =
+@@ -153,6 +153,10 @@ static inline unsigned int riscv_insn_length (insn_t insn)
    (RV_X(x, 0, 10) << 20)
  #define ENCODE_RVV_VC_IMM(x) \
    (RV_X(x, 0, 11) << 20)
@@ -113,10 +104,10 @@ index b115e338a0..4afb16c092 100644
 +  (RV_X(x, 0, 4) << 20)
 +#define ENCODE_PREF_SIMM(x) \
 +  (RV_X(x, 0, 8) << 24)
+ #define ENCODE_RVV_VI_UIMM6(x) \
+   (RV_X(x, 0, 5) << 15 | RV_X(x, 5, 1) << 26)
  
- #define VALID_ITYPE_IMM(x) (EXTRACT_ITYPE_IMM(ENCODE_ITYPE_IMM(x)) == (x))
- #define VALID_STYPE_IMM(x) (EXTRACT_STYPE_IMM(ENCODE_STYPE_IMM(x)) == (x))
-@@ -256,6 +260,11 @@ static const char * const riscv_pred_succ[16] =
+@@ -255,6 +259,11 @@ static inline unsigned int riscv_insn_length (insn_t insn)
  #define OP_MASK_FUNCT2		0x3
  #define OP_SH_FUNCT2		25
  
@@ -129,11 +120,11 @@ index b115e338a0..4afb16c092 100644
  
  #define OP_MASK_OP2		0x3
 diff --git a/opcodes/riscv-dis.c b/opcodes/riscv-dis.c
-index 164fd209db..9a9660cf21 100644
+index 827d9b67437..3bb530a632c 100644
 --- a/opcodes/riscv-dis.c
 +++ b/opcodes/riscv-dis.c
-@@ -490,6 +490,16 @@ print_insn_args (const char *oparg, insn_t l, bfd_vma pc, disassemble_info *info
- 		 (int)EXTRACT_OPERAND (SHAMTW, l));
+@@ -519,6 +519,16 @@ print_insn_args (const char *oparg, insn_t l, bfd_vma pc, disassemble_info *info
+ 		 (unsigned)EXTRACT_OPERAND (SHAMTW, l));
  	  break;
  
 +	case '#':
@@ -150,10 +141,10 @@ index 164fd209db..9a9660cf21 100644
  	case 'U':
  	  print (info->stream, dis_style_register, "%s", riscv_fpr_names[rs1]);
 diff --git a/opcodes/riscv-opc.c b/opcodes/riscv-opc.c
-index 2f9945aa93..5632408ebd 100644
+index 533e3f4a079..985e2d1b275 100644
 --- a/opcodes/riscv-opc.c
 +++ b/opcodes/riscv-opc.c
-@@ -401,6 +401,7 @@ const struct riscv_opcode riscv_opcodes[] =
+@@ -470,6 +470,7 @@ const struct riscv_opcode riscv_opcodes[] =
  {"snez",        0, INSN_CLASS_I, "d,t",       MATCH_SLTU, MASK_SLTU|MASK_RS1, match_opcode, INSN_ALIAS },
  {"sltz",        0, INSN_CLASS_I, "d,s",       MATCH_SLT, MASK_SLT|MASK_RS2, match_opcode, INSN_ALIAS },
  {"sgtz",        0, INSN_CLASS_I, "d,t",       MATCH_SLT, MASK_SLT|MASK_RS1, match_opcode, INSN_ALIAS },
