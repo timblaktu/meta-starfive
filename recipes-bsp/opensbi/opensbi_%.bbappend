@@ -1,6 +1,6 @@
 FORK:starfive-dubhe = "starfive-tech"
-BRANCH:starfive-dubhe = "starfive-v1.2-dubhe"
-SRCREV:starfive-dubhe = "8ce81d0fbcbb10d4ad9e924c8cd64925b79e0cb6"
+BRANCH:starfive-dubhe = "starfive-v1.4-dubhe"
+SRCREV:starfive-dubhe = "cbe45cb6ab205fa51d6d19bd8bbc9cb9810f952d"
 
 FORK:starfive-visionfive2 = "starfive-tech"
 BRANCH:starfive-visionfive2 = "master"
@@ -28,7 +28,7 @@ SRC_URI:remove:nezha = "\
         file://0002-lib-utils-timer-Add-a-separate-compatible-for-the-D1.patch \
         "
 
-EXTRA_OEMAKE:starfive-dubhe = "PLATFORM=${RISCV_SBI_PLAT} I=${D} FW_PIC=n CLANG_TARGET= FW_OPTIONS=0 FW_TEXT_START=0x80100000 PLATFORM_DEFCONFIG=starfive_defconfig"
+EXTRA_OEMAKE:starfive-dubhe = "PLATFORM=${RISCV_SBI_PLAT} I=${D} CLANG_TARGET= FW_OPTIONS=0 FW_TEXT_START=0x80100000"
 EXTRA_OEMAKE:starfive-visionfive2 = "PLATFORM=${RISCV_SBI_PLAT} I=${D} FW_PIC=n CLANG_TARGET= FW_TEXT_START=0x40000000"
 EXTRA_OEMAKE:starfive-jh8100 = "PLATFORM=${RISCV_SBI_PLAT} I=${D} FW_PIC=n CLANG_TARGET= FW_OPTIONS=0 FW_TEXT_START=0x40000000 PLATFORM_DEFCONFIG=starfive_defconfig"
 
