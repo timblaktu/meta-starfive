@@ -4,15 +4,14 @@ LLVM_DIR = "llvm${LLVM_RELEASE}"
 LLVM_GIT ?= "git://github.com/llvm"
 LLVM_GIT_PROTOCOL ?= "https"
 
-MAJOR_VER = "16"
+MAJOR_VER = "17"
 MINOR_VER = "0"
-PATCH_VER = "5"
+PATCH_VER = "0"
 
-SRCREV ?= "185b81e034ba60081023b6e59504dfffb560f3e3"
+SRCREV ?= "e19b7dc36bc047b9eb72078d034596be766da350"
 
 PV = "${MAJOR_VER}.${MINOR_VER}.${PATCH_VER}"
-#BRANCH = "release/15.x"
-BRANCH = "release/16.x"
+BRANCH = "release/17.x"
 
 LLVMMD5SUM = "8a15a0759ef07f2682d2ba4b893c9afe"
 CLANGMD5SUM = "ff42885ed2ab98f1ecb8c1fc41205343"

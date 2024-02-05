@@ -251,9 +251,9 @@ endif()\n" ${D}${libdir}/cmake/llvm/LLVMExports-release.cmake
 
 do_install:append:class-native () {
     install -Dm 0755 ${B}${BINPATHPREFIX}/bin/clang-tblgen ${D}${bindir}/clang-tblgen
-    install -Dm 0755 ${B}/bin/clang-pseudo-gen ${D}${bindir}/clang-pseudo-gen
-    install -Dm 0755 ${B}/bin/lldb-tblgen ${D}${bindir}/lldb-tblgen
-    install -Dm 0755 ${B}/bin/clang-tidy-confusable-chars-gen ${D}${bindir}/clang-tidy-confusable-chars-gen
+    install -Dm 0755 ${B}${BINPATHPREFIX}/bin/clang-pseudo-gen ${D}${bindir}/clang-pseudo-gen
+    install -Dm 0755 ${B}${BINPATHPREFIX}/bin/lldb-tblgen ${D}${bindir}/lldb-tblgen
+    install -Dm 0755 ${B}${BINPATHPREFIX}/bin/clang-tidy-confusable-chars-gen ${D}${bindir}/clang-tidy-confusable-chars-gen
     for f in `find ${D}${bindir} -executable -type f -not -type l`; do
         test -n "`file -b $f|grep -i ELF`" && ${STRIP} $f
         echo "stripped $f"
@@ -280,9 +280,6 @@ do_install:append:class-nativesdk () {
 
 PACKAGES =+ "${PN}-libllvm ${PN}-lldb-python ${PN}-libclang-cpp ${PN}-tidy ${PN}-format ${PN}-tools \
              libclang lldb lldb-server liblldb llvm-linker-tools"
-
-PROVIDES += "llvm llvm${PV}"
-PROVIDES:append:class-native = " llvm-native"
 
 BBCLASSEXTEND = "native nativesdk"
 

@@ -26,3 +26,6 @@ EXTRA_OECMAKE:append:class-native = " \
 			-DLLDB_PYTHON_RELATIVE_PATH="recipe-sysroot-native/usr/bin/python3-native/" \
                         -DLLDB_PYTHON_EXT_SUFFIX=".so" \
 			"
+
+PROVIDES += "llvm llvm${PV}"
+PROVIDES:append:class-native = " llvm-native"

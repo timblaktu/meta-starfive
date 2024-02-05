@@ -1,7 +1,7 @@
-From bcd728e619143e082767170bfd7b255e521923db Mon Sep 17 00:00:00 2001
+From 89088497bdbe65b231ed1c59ce5d07b3fa3f42d5 Mon Sep 17 00:00:00 2001
 From: "yilun.xie" <yilun.xie@starfivetech.com>
-Date: Fri, 29 Oct 2021 10:16:06 +0800
-Subject: [PATCH 4/9] [RISCV] Add customer cache instructions
+Date: Fri, 22 Dec 2023 17:48:39 -0800
+Subject: [PATCH 5/8] [RISCV] Add customer cache instructions
 
 ---
  llvm/lib/Target/RISCV/RISCVInstrFormats.td | 12 ++++++++++++
@@ -9,11 +9,11 @@ Subject: [PATCH 4/9] [RISCV] Add customer cache instructions
  2 files changed, 25 insertions(+)
 
 diff --git a/llvm/lib/Target/RISCV/RISCVInstrFormats.td b/llvm/lib/Target/RISCV/RISCVInstrFormats.td
-index e913edc47ec2..d3953227b0cd 100644
+index cdea63fbe26b..42cfdbc7b886 100644
 --- a/llvm/lib/Target/RISCV/RISCVInstrFormats.td
 +++ b/llvm/lib/Target/RISCV/RISCVInstrFormats.td
-@@ -377,6 +377,18 @@ class RVInstPref<RISCVOpcode opcode, dag outs, dag ins,
-   let Opcode = opcode.Value;
+@@ -387,6 +387,18 @@ class RVInstPref<RISCVOpcode opcode, dag outs, dag ins,
+   let Inst{6-0} = opcode.Value;
  }
  
 +class RVInstCache<bits<12> cache, RISCVOpcode opcode, dag outs, dag ins,
@@ -25,17 +25,17 @@ index e913edc47ec2..d3953227b0cd 100644
 +  let Inst{19-15} = rs1;
 +  let Inst{14-12} = 0;
 +  let Inst{11-7} = 0;
-+  let Opcode = opcode.Value;
++  let Inst{6-0} = opcode.Value;
 +}
 +
  class RVInstIShift<bits<5> imm11_7, bits<3> funct3, RISCVOpcode opcode,
                     dag outs, dag ins, string opcodestr, string argstr>
      : RVInst<outs, ins, opcodestr, argstr, [], InstFormatI> {
 diff --git a/llvm/lib/Target/RISCV/RISCVInstrInfo.td b/llvm/lib/Target/RISCV/RISCVInstrInfo.td
-index 5849327ca255..6bd3de20b807 100644
+index 0e036728442a..fe2f2ce6a277 100644
 --- a/llvm/lib/Target/RISCV/RISCVInstrInfo.td
 +++ b/llvm/lib/Target/RISCV/RISCVInstrInfo.td
-@@ -586,6 +586,12 @@ class PREF_iir<string opcodestr>
+@@ -619,6 +619,12 @@ class PREF_iir<string opcodestr>
      : RVInstPref<OPC_OP_IMM, (outs), (ins uimm4_pref:$imm4, simm8:$imm8, GPR:$rs1),
                opcodestr, "$imm4, ${imm8}(${rs1})">;
  
@@ -48,7 +48,7 @@ index 5849327ca255..6bd3de20b807 100644
  let hasNoSchedulingInfo = 1,
      hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
  class CSR_ii<bits<3> funct3, string opcodestr>
-@@ -773,6 +779,13 @@ def WRS_STO : RVInstI<0b000, OPC_SYSTEM, (outs), (ins), "wrs.sto", "">,
+@@ -806,6 +812,13 @@ def WRS_STO : RVInstI<0b000, OPC_SYSTEM, (outs), (ins), "wrs.sto", "">,
  
  } // hasSideEffects = 1, mayLoad = 0, mayStore = 0
  
