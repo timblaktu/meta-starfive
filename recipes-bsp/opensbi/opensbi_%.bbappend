@@ -7,8 +7,8 @@ BRANCH:starfive-visionfive2 = "master"
 SRCREV:starfive-visionfive2 = "c6a092cd80112529cb2e92e180767ff5341b22a3"
 
 FORK:starfive-jh8100 = "starfive-tech"
-BRANCH:starfive-jh8100 = "fpga-starfive-v1.2-jh8100-bmc-30Nov"
-SRCREV:starfive-jh8100 = "7cbdf359bb9d2f4c79c736fa92952a06a7740657"
+BRANCH:starfive-jh8100 = "fpga-starfive-v1.2-jh8100"
+SRCREV:starfive-jh8100 = "924640487c6815c63adcbf19fbf3283900988a6f"
 
 SRC_URI:starfive-dubhe = "\
 	git://github.com/${FORK}/opensbi.git;protocol=https;branch=${BRANCH} \
