@@ -80,4 +80,7 @@ RDEPENDS:${PN} = "\
     dhcp-client \
     dhcp-relay \
     dhcp-omshell \
+    libdrm \
+    alsa-utils \
+    v4l-utils \
     "
