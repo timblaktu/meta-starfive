@@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e6dc25dc2418b8831c906d43809d8336"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI = "git://git@192.168.110.45/sdk/soft_3rdpart;protocol=ssh;branch=jh7110-devel"
-
-SRCREV = "10f543ca35e14809a9b4e9df814b798aa4362d14"
+SRC_URI = "git://github.com/starfive-tech/tools.git;protocol=https;branch=master"
+SRCREV = "6067c32c4cc11749a503b0708d98d6d45022cc0c"
 
 S = "${WORKDIR}/git/spl_tool"
 
