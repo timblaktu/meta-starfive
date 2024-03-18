@@ -14,7 +14,7 @@ BRANCH:starfive-dubhe = "dubhe_fpga_dev_v2023.10"
 SRCREV:starfive-dubhe = "cef715ce412e97f17acab08529540c9fa317a923"
 
 FORK:starfive-visionfive2 = "starfive-tech"
-BRANCH:starfive-visionfive2 = "JH7110_VisionFive2_devel"
+BRANCH:starfive-visionfive2 = "JH7110_VisionFive2_devel-v3.9.3"
 SRCREV:starfive-visionfive2 = "b6e2b0e85c774a18ae668223a6e5f7d335895243"
 
 FORK:starfive-jh8100 = "starfive-tech"
