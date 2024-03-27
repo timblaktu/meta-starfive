@@ -36,6 +36,15 @@ IMAGE_INSTALL:starfive-dubhe += "\
 
 IMAGE_INSTALL:starfive-jh8100 += "\
 	i3c-tools \
+	firmware-hifi4 \
+	libdrm \
+	alsa-utils \
+	v4l-utils \
+	can-utils \
+	iproute2 \
+	rng-tools \
+	iperf3 \
+	e2fsprogs-resize2fs \
 	"
 
 TOOLCHAIN_TARGET_TASK += "packagegroup-starfive-toolchain"
