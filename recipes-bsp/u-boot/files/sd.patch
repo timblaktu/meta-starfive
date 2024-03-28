@@ -1,0 +1,13 @@
+diff --git a/board/starfive/jh8100/spl.c b/board/starfive/jh8100/spl.c
+index b68ce7facd..a91e5ca98d 100644
+--- a/board/starfive/jh8100/spl.c
++++ b/board/starfive/jh8100/spl.c
+@@ -49,7 +49,7 @@ int spl_board_init_f(void)
+ 
+ u32 spl_boot_device(void)
+ {
+-	int boot_mode = 4;
++	int boot_mode = 1;
+ 
+ 	switch (boot_mode) {
+ 	case 0:

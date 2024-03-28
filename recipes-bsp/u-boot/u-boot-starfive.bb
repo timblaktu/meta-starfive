@@ -19,7 +19,7 @@ SRCREV:starfive-visionfive2 = "b6e2b0e85c774a18ae668223a6e5f7d335895243"
 
 FORK:starfive-jh8100 = "starfive-tech"
 BRANCH:starfive-jh8100 = "jh8100_fpga_dev_v2023.01"
-SRCREV:starfive-jh8100 = "7f3f31a04b3a0e2bd7f3c78d290648e33abbb646"
+SRCREV:starfive-jh8100 = "13f34a269e2302e343246ae6af473d98f6001444"
 
 SRC_URI:starfive-dubhe = "\
 	git://github.com/${FORK}/u-boot.git;protocol=https;branch=${BRANCH} \
@@ -43,6 +43,7 @@ SRC_URI:starfive-jh8100 = "\
 	file://bootloader.bin.normal.out \
 	file://firmware_merak.bin.normal.out \
 	file://uboot.env \
+	file://sd.patch \
 	"
 
 DEPENDS:append:starfive-dubhe = " u-boot-tools-native bmap-tools-native opensbi"
