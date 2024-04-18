@@ -18,8 +18,8 @@ BRANCH:starfive-visionfive2 = "JH7110_VisionFive2_devel-v3.9.3"
 SRCREV:starfive-visionfive2 = "b6e2b0e85c774a18ae668223a6e5f7d335895243"
 
 FORK:starfive-jh8100 = "starfive-tech"
-BRANCH:starfive-jh8100 = "jh8100_fpga_dev_v2023.01"
-SRCREV:starfive-jh8100 = "13f34a269e2302e343246ae6af473d98f6001444"
+BRANCH:starfive-jh8100 = "jh8100_fpga_dev_v2023.01_rebase_v2_2.0.8"
+SRCREV:starfive-jh8100 = "442d4f8d5bc53f52b88d1d410709f3441d4f94af"
 
 SRC_URI:starfive-dubhe = "\
 	git://github.com/${FORK}/u-boot.git;protocol=https;branch=${BRANCH} \
@@ -40,10 +40,9 @@ SRC_URI:starfive-jh8100 = "\
 	git://github.com/${FORK}/u-boot.git;protocol=https;branch=${BRANCH} \
 	file://tftp-mmc-boot.txt \
 	file://run_qemu_virt.dtb \
-	file://bootloader.bin.normal.out \
-	file://firmware_merak.bin.normal.out \
+	file://jh8100-fpga.bin.normal.out \
+	file://firmware.bin.normal.out \
 	file://uboot.env \
-	file://sd.patch \
 	"
 
 DEPENDS:append:starfive-dubhe = " u-boot-tools-native bmap-tools-native opensbi"
@@ -89,22 +88,21 @@ do_deploy:append:starfive-dubhe() {
 
 do_deploy:append:starfive-jh8100() {
     install -m 644 ${WORKDIR}/uboot.env ${DEPLOYDIR}/uboot.env
-    install -m 644 ${WORKDIR}/bootloader.bin.normal.out ${DEPLOYDIR}/bootloader.bin.normal.out
-    install -m 644 ${WORKDIR}/firmware_merak.bin.normal.out ${DEPLOYDIR}/firmware_merak.bin.normal.out
+    install -m 644 ${WORKDIR}/jh8100-fpga.bin.normal.out ${DEPLOYDIR}/jh8100-fpga.bin.normal.out
+    install -m 644 ${WORKDIR}/firmware.bin.normal.out ${DEPLOYDIR}/firmware.bin.normal.out
     install -m 644 ${B}/u-boot.itb ${DEPLOYDIR}/u-boot.itb
     install -m 644 ${WORKDIR}/run_qemu_virt.dtb ${DEPLOYDIR}/run_qemu_virt.dtb
 
     mkbif ${DEPLOYDIR}/${SPL_BINARYNAME}
 
-    dd if=${WORKDIR}/bootloader.bin.normal.out of=${DEPLOYDIR}/scp_raw.img count=1 bs=512k conv=sync
-    dd if=${WORKDIR}/bootloader.bin.normal.out of=${DEPLOYDIR}/scp_raw.img seek=1 count=1 bs=512k conv=sync
+    dd if=${WORKDIR}/jh8100-fpga.bin.normal.out of=${DEPLOYDIR}/scp_raw.img count=1 bs=512k conv=sync
+    dd if=${WORKDIR}/jh8100-fpga.bin.normal.out of=${DEPLOYDIR}/scp_raw.img seek=1 count=1 bs=512k conv=sync
 
-    dd if=${WORKDIR}/firmware_merak.bin.normal.out of=${DEPLOYDIR}/scp_raw.img seek=2 count=1 bs=512k conv=sync
-    dd if=${WORKDIR}/firmware_merak.bin.normal.out of=${DEPLOYDIR}/scp_raw.img seek=3 count=1 bs=512k conv=sync
+    dd if=${WORKDIR}/firmware.bin.normal.out of=${DEPLOYDIR}/scp_raw.img seek=2 count=1 bs=512k conv=sync
+    dd if=${WORKDIR}/firmware.bin.normal.out of=${DEPLOYDIR}/scp_raw.img seek=3 count=1 bs=512k conv=sync
 
     dd if=${DEPLOYDIR}/${SPL_BINARYNAME}.normal.out of=${DEPLOYDIR}/scp_raw.img seek=4 count=1 bs=512k conv=sync
     dd if=${DEPLOYDIR}/${SPL_BINARYNAME}.normal.out of=${DEPLOYDIR}/scp_raw.img seek=5 count=1 bs=512k conv=sync
-
 }
 
 TOOLCHAIN = "gcc"
