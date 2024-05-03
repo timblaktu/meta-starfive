@@ -14,7 +14,7 @@ SRCREV:starfive-dubhe = "04aa970f7275815928be62096f8eaa52024d30b9"
 
 FORK:starfive-jh8100 = "starfive-tech"
 BRANCH:starfive-jh8100 = "starfive-6.6.10-dev-external-jh8100"
-SRCREV:starfive-jh8100 = "0438eca24488f304b048bb47391177b88fd7ebcd"
+SRCREV:starfive-jh8100 = "9da8129da97b9fb9fb1662475935f52e546b9385"
 
 LINUX_VERSION ?= "6.6.10"
 LINUX_VERSION:starfive-dubhe = "6.6.10"
@@ -31,6 +31,7 @@ SRC_URI:starfive-dubhe = " \
 
 SRC_URI:starfive-jh8100 = "\
 	git://github.com/${FORK}/linux.git;protocol=https;branch=${BRANCH} \
+	file://jh8100.cfg \
 	"
 
 INITRAMFS_IMAGE_BUNDLE:starfive-dubhe = "1"
