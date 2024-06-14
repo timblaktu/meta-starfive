@@ -70,6 +70,7 @@ SRC_URI = "${BASEURI} \
            file://0028-add-b-extension-support.patch \
            file://0029-RISC-V-Handle-different-sigcontext-struct-layout.patch \
            file://0030-RISCV-default-enable-align-functions-16-and-align-lo.patch \
+           file://0031-ira-Increase-the-cost-of-inner-loop-spill.patch \
            file://0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
            file://0002-gcc-poison-system-directories.patch \
            file://0003-64-bit-multilib-hack.patch \
