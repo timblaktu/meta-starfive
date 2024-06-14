@@ -18,6 +18,7 @@ SRC_URI = "file://ldconfig-native-2.12.1.tar.bz2 \
            file://add-riscv-support.patch \
 "
 
+PR = "r2"
 
 FILESEXTRAPATHS =. "${FILE_DIRNAME}/${P}:"
 

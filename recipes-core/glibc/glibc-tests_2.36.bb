@@ -8,7 +8,7 @@ SRC_URI += "\
 	file://run-ptest \
 "
 
-SUMMARY = "glibc tests using time32/time64 interfaces to be run with ptest for the purpose of checking y2038 compatiblity"
+SUMMARY = "glibc tests to be run with ptest"
 
 # Erase some variables already set by glibc_${PV}
 python __anonymous() {
@@ -27,7 +27,7 @@ python __anonymous() {
 # Remove any leftovers from original glibc recipe
 RPROVIDES:${PN} = "${PN}"
 RRECOMMENDS:${PN} = ""
-RDEPENDS:${PN} = "glibc libgcc sed bash"
+RDEPENDS:${PN} = " glibc sed"
 RDEPENDS:${PN}-ptest = "${PN}"
 DEPENDS += "sed"
 
