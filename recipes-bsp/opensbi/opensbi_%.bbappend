@@ -1,6 +1,6 @@
 FORK:starfive-dubhe = "starfive-tech"
 BRANCH:starfive-dubhe = "starfive-v1.4-dubhe"
-SRCREV:starfive-dubhe = "cbe45cb6ab205fa51d6d19bd8bbc9cb9810f952d"
+SRCREV:starfive-dubhe = "6e71d90592d81a41335c480f7704250ba9592fee"
 
 FORK:starfive-visionfive2 = "starfive-tech"
 BRANCH:starfive-visionfive2 = "master"
