@@ -109,7 +109,9 @@ do_create_output_folder:starfive-dubhe() {
         cp ${DEPLOY_DIR_IMAGE}/Image-sd-${MACHINE}.img ${DEPLOY_DIR_IMAGE}/Dubhe-80
 
         cp -r ${DEPLOY_DIR_IMAGE}/Dubhe-80 ${DEPLOY_DIR_IMAGE}/Dubhe-90
+        cp -r ${DEPLOY_DIR_IMAGE}/Dubhe-80 ${DEPLOY_DIR_IMAGE}/Dubhe-70
 
+	cp ${DEPLOY_DIR_IMAGE}/dubhe70_fpga.dtb ${DEPLOY_DIR_IMAGE}/Dubhe-70/dubhe_fpga.dtb
         cp ${DEPLOY_DIR_IMAGE}/dubhe80_fpga.dtb ${DEPLOY_DIR_IMAGE}/Dubhe-80/dubhe_fpga.dtb
         cp ${DEPLOY_DIR_IMAGE}/dubhe90_fpga.dtb ${DEPLOY_DIR_IMAGE}/Dubhe-90/dubhe_fpga.dtb
 }
