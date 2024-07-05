@@ -16,7 +16,6 @@ TOOLCHAIN_TEST_HOST_USER ??= "root"
 TOOLCHAIN_TEST_HOST_PORT ??= "2222"
 
 do_check[nostamp] = "1"
-do_check[network] = "1"
 do_check:append () {
     chmod 0755 ${WORKDIR}/check-test-wrapper
 
